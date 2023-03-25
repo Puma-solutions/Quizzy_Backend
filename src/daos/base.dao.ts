@@ -16,8 +16,8 @@ db.on("error", (err) => {
   logger.error(`MongoDB connection error: ${err}`);
 });
 
-export class BaseDao<T extends mongoose.Document> {
-  private collection: mongoose.Model<T>;
+export class BaseDao<T> {
+  protected collection: mongoose.Model<T>;
 
   constructor(model: mongoose.Model<T>) {
     this.collection = model;
