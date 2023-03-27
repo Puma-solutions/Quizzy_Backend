@@ -6,6 +6,12 @@ const examDao = new ExamDao();
 import { SubjectServices } from "./subjects.services";
 
 export class ExamServices{
+    static async getExamById(idExam:string){
+        if(!idExam) throw new AppError(400,'You must specify idExam as a parameter')
+        const data = await examDao.getExamByIdPopulate(idExam)
+        if(!data) throw new AppError(400,'Exam not found')
+        return data
+    }
     static async createExam(body:any){
         if(!body || !body.name || !body.idSubject) throw new AppError(400,'You must send all the fields (name, id_subject)')
         const subject = await SubjectServices.getByID(body.idSubject)

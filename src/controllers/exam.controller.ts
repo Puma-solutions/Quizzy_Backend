@@ -2,6 +2,15 @@ import { NextFunction, Request, Response } from "express";
 import { ExamServices } from "../services/exam.services";
 
 export class ExamController{
+    static async getExamById(req:Request,res:Response,next:NextFunction){
+        try{
+            const exam = await ExamServices.getExamById(req.params.idExam)
+            res.json(exam)
+        }
+        catch(err){
+            next(err)
+        }
+    }
     static async createExam(req:Request,res:Response,next:NextFunction){
         try{
             const idExam = await ExamServices.createExam(req.body)

@@ -9,4 +9,8 @@ export class ExamDao extends BaseDao<Exam>{
         const exams = this.collection.find({idSubject:idSubject})
         return exams
     }
+    async getExamByIdPopulate(idExam:string){
+        const exam = this.collection.findById(idExam).populate('idSubject','name')
+        return exam
+    }
 }
